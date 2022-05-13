@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const cTable = require('console.table');
-//const db = require ('./utils/index');
-const db = require ('./db/connection');
+const db = require ('./utils/index');
+//const db = require ('./db/connection');
 
 async function mainPrompt()  {
     const { choice } = await inquirer.prompt([
@@ -44,15 +44,16 @@ async function mainPrompt()  {
 
 switch(choice) {
     case 'viewDepartments':
+        //console.log(choice);
         // const departments =  db.viewDepartments();
         // return console.table(departments);
         //return console.log('Placeholder')
-        const sql = 'SELECT * FROM department';
+        // const sql = 'SELECT * FROM department';
 
-        db.query(sql, (err, row) => {
-            return console.table(row);
-        });
-        
+        // db.query(sql, (err, row) => {
+        //     return console.table(row);
+        // });
+        console.log('You are now viewing all departments');
         break;
     case 'viewRoles':
         console.log('Currently viewing all roles');
