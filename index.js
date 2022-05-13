@@ -1,9 +1,10 @@
 const inquirer = require('inquirer');
 const cTable = require('console.table');
-//const db = require ('db');
+//const db = require ('./utils/index');
+const db = require ('./db/connection');
 
-const mainPrompt = () => {
-    return inquirer.prompt([
+async function mainPrompt()  {
+    const { choice } = await inquirer.prompt([
         {
             type: 'list',
             name: 'choice',
@@ -39,25 +40,39 @@ const mainPrompt = () => {
                 }
             ]
         }
-    ]).then(data => {
-        switch(data.choice) {
-            case 'viewDepartments':
-                return console.log('Currently viewing all departments');
-            case 'viewRoles':
-                return console.log('Currently viewing all roles');
-            case 'viewEmployees':
-                return console.log('Currently viewing all employees');
-            case 'addDepartment':
-                return console.log('Currently adding a department');
-            case 'addRole':
-                return console.log('Currently adding a role');
-            case 'addEmployee':
-                return console.log('Currently adding an employee');
-            case 'updateEmployee':
-                return console.log('You are now updating employee information');
-        };
+    ])
 
-    })
+switch(choice) {
+    case 'viewDepartments':
+        // const departments =  db.viewDepartments();
+        // return console.table(departments);
+        //return console.log('Placeholder')
+        const sql = 'SELECT * FROM department';
+
+        db.query(sql, (err, row) => {
+            return console.table(row);
+        });
+        
+        break;
+    case 'viewRoles':
+        console.log('Currently viewing all roles');
+        break;
+    case 'viewEmployees':
+        console.log('Currently viewing all employees');
+        break;
+    case 'addDepartment':
+        console.log('Currently adding a department');
+        break;
+    case 'addRole':
+        console.log('Currently adding a role');
+        break;
+    case 'addEmployee':
+        console.log('Currently adding an employee');
+        break;
+    case 'updateEmployee':
+        console.log('You are now updating employee information');
+        break;
+};
 };
 
 
