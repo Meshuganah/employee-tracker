@@ -6,17 +6,9 @@ class DbQuery {
     }
 
     viewDepartments() {
-        const sql = 'SELECT * FROM department'
-
-        return new Promise((resolve, reject) => {
-            db.query(sql, function(err, result) {
-                if (err) {
-                    reject(err);
-                }
-                resolve(result);
-            })
-        })
-        //return db.query('SELECT * FROM department');
+        return this.db.promise().query(
+            'SELECT * FROM department'
+        );
     };
 };
 

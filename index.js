@@ -107,8 +107,10 @@ const mainPrompt = () => {
     ]).then(data => {
         switch(data.choice) {
             case 'viewDepartments':
-                const departments =  Db.viewDepartments();
-                return console.log(departments);
+                // Db.viewDepartments().then(([results]) => {
+                //     console.table(results)});
+                // mainPrompt();
+                getDepartments();
             case 'viewRoles':
                 return console.log('Currently viewing all roles');
             case 'viewEmployees':
@@ -122,8 +124,14 @@ const mainPrompt = () => {
             case 'updateEmployee':
                 return console.log('You are now updating employee information');
         };
-
     })
 };
 
+function getDepartments() {
+    Db.viewDepartments()
+    .then(([results]) => {
+        console.table(results);
+    });
+    mainPrompt();
+}
 mainPrompt();
